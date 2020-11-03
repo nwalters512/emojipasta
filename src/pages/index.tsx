@@ -2,6 +2,7 @@ import React from "react";
 import { GetStaticProps } from "next";
 
 import { Emojipasta, getAllEmojipasta } from "../data/emojipasta";
+import { ContentContainer } from "../components";
 
 interface IndexProps {
   items: Emojipasta[];
@@ -9,7 +10,7 @@ interface IndexProps {
 
 const Index: React.FC<IndexProps> = ({ items }) => {
   return (
-    <React.Fragment>
+    <ContentContainer>
       <h1>Emojipasta</h1>
       {items.map((item) => (
         <React.Fragment>
@@ -17,7 +18,7 @@ const Index: React.FC<IndexProps> = ({ items }) => {
           <p>{item.contents}</p>
         </React.Fragment>
       ))}
-    </React.Fragment>
+    </ContentContainer>
   );
 };
 
