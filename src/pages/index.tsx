@@ -1,5 +1,6 @@
 import React from "react";
 import { GetStaticProps } from "next";
+import Link from "next/link";
 
 import { Emojipasta, getAllEmojipasta } from "../data/emojipasta";
 import { ContentContainer } from "../components";
@@ -14,7 +15,11 @@ const Index: React.FC<IndexProps> = ({ items }) => {
       <h1>Emojipasta</h1>
       {items.map((item) => (
         <React.Fragment>
-          <h2>{item.title}</h2>
+          <Link href={`/${item.slug}`}>
+            <a>
+              <h2>{item.title}</h2>
+            </a>
+          </Link>
           <p>{item.contents}</p>
         </React.Fragment>
       ))}
