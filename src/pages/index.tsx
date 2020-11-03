@@ -1,9 +1,14 @@
 import React from "react";
 import { GetStaticProps } from "next";
-import Link from "next/link";
 
 import { Emojipasta, getAllEmojipasta } from "../data/emojipasta";
-import { ContentContainer } from "../components";
+import {
+  CardLink,
+  ContentContainer,
+  Heading,
+  Stack,
+  Text,
+} from "../components";
 
 interface IndexProps {
   items: Emojipasta[];
@@ -13,16 +18,18 @@ const Index: React.FC<IndexProps> = ({ items }) => {
   return (
     <ContentContainer>
       <h1>Emojipasta</h1>
-      {items.map((item) => (
-        <React.Fragment>
-          <Link href={`/${item.slug}`}>
-            <a>
-              <h2>{item.title}</h2>
-            </a>
-          </Link>
-          <p>{item.contents}</p>
-        </React.Fragment>
-      ))}
+      <Stack>
+        {items.map((item) => (
+          <React.Fragment>
+            <CardLink href={`/${item.slug}`}>
+              <Stack>
+                <Heading level={2}>{item.title}</Heading>
+                <Text>{item.contents}</Text>
+              </Stack>
+            </CardLink>
+          </React.Fragment>
+        ))}
+      </Stack>
     </ContentContainer>
   );
 };
