@@ -11,10 +11,24 @@ interface EmojipastaPathsParam {
 }
 
 const EmojipastaPage: React.FC<EmojipastaPageProps> = ({ title, contents }) => {
+  const share = async () => {
+    try {
+      navigator.share({
+        title,
+        text: contents,
+        url: window.location.href,
+      });
+    } catch (e) {
+      console.error(e);
+    }
+  };
   return (
     <ContentContainer>
       <h1>{title}</h1>
       <p>{contents}</p>
+      <button type="button" onClick={share}>
+        Share with...
+      </button>
     </ContentContainer>
   );
 };
