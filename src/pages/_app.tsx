@@ -5,11 +5,15 @@ import { AppProps } from "next/app";
 import { TreatProvider } from "react-treat";
 
 import lightTheme from "../themes/light.treat";
+import { NavBar, Stack } from "../components";
 
 const App: React.FC<AppProps> = ({ Component, pageProps }) => {
   return (
     <TreatProvider theme={lightTheme}>
-      <Component {...pageProps} />
+      <Stack>
+        <NavBar />
+        <Component {...pageProps} />
+      </Stack>
     </TreatProvider>
   );
 };

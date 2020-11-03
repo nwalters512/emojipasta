@@ -14,7 +14,7 @@ const EmojipastaPage: React.FC<EmojipastaPageProps> = ({ title, contents }) => {
   // We don't know if the browser supports the `navigator.share` API on the
   // server, so we'll assume they do not during SSR and show the button on
   // the client if needed.
-  const [supportsShare, setSupportsShare] = React.useState(true);
+  const [supportsShare, setSupportsShare] = React.useState(false);
   React.useEffect(() => {
     setSupportsShare(typeof navigator.share !== "undefined");
   }, []);

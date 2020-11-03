@@ -18,7 +18,6 @@ const Index: React.FC<IndexProps> = ({ items }) => {
   return (
     <ContentContainer>
       <Stack>
-        <Heading level={1}>Emojipasta</Heading>
         {items.map((item) => (
           <React.Fragment>
             <CardLink href={`/${item.slug}`}>
