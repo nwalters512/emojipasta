@@ -14,16 +14,18 @@ export const Stack: React.FC<StackProps> = ({ children }) => {
   const styles = useStyles(styleRefs);
   return (
     <div>
-      {flattenedChildren.map((child, index) => (
-        <div
-          key={(child as any).key || index}
-          className={classnames(
-            index !== flattenChildren.length - 1 ? styles.base : null
-          )}
-        >
-          {child}
-        </div>
-      ))}
+      {flattenedChildren.map((child, index) => {
+        return (
+          <div
+            key={(child as any).key || index}
+            className={classnames(
+              index !== flattenedChildren.length - 1 ? styles.base : null
+            )}
+          >
+            {child}
+          </div>
+        );
+      })}
     </div>
   );
 };
