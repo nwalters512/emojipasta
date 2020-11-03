@@ -1,7 +1,7 @@
 import React from "react";
 import { GetStaticProps, GetStaticPaths } from "next";
 import { Emojipasta, getAllEmojipasta } from "../data/emojipasta";
-import { ContentContainer } from "../components";
+import { Button, ContentContainer, Heading, Stack, Text } from "../components";
 
 interface EmojipastaPageProps extends Emojipasta {}
 
@@ -11,9 +11,17 @@ interface EmojipastaPathsParam {
 }
 
 const EmojipastaPage: React.FC<EmojipastaPageProps> = ({ title, contents }) => {
+  // We don't know if the browser supports the `navigator.share` API on the
+  // server, so we'll assume they do not during SSR and show the button on
+  // the client if needed.
+  const [supportsShare, setSupportsShare] = React.useState(true);
+  React.useEffect(() => {
+    setSupportsShare(typeof navigator.share !== "undefined");
+  }, []);
+
   const share = async () => {
     try {
-      navigator.share({
+      await navigator.share({
         title,
         text: contents,
         url: window.location.href,
@@ -22,13 +30,18 @@ const EmojipastaPage: React.FC<EmojipastaPageProps> = ({ title, contents }) => {
       console.error(e);
     }
   };
+
   return (
     <ContentContainer>
-      <h1>{title}</h1>
-      <p>{contents}</p>
-      <button type="button" onClick={share}>
-        Share with...
-      </button>
+      <Stack>
+        <Heading level={1}>{title}</Heading>
+        <Text>{contents}</Text>
+        {supportsShare && (
+          <Button type="button" onClick={share}>
+            Share with...
+          </Button>
+        )}
+      </Stack>
     </ContentContainer>
   );
 };

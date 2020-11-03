@@ -9,7 +9,7 @@ import lightTheme from "../themes/light.treat";
 const App: React.FC<AppProps> = ({ Component, pageProps }) => {
   return (
     <TreatProvider theme={lightTheme}>
-      <Component {...pageProps} />;
+      <Component {...pageProps} />
     </TreatProvider>
   );
 };
